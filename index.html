@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+  
+<meta charset="UTF-8">
+<meta name="description" content="A world story with bitcoin">
+<meta name="keywords" content="HTML,bitcoin,papyrus,cryptocurrency">
+<meta name="author" content="BitcoinPapyrus">  
+  
+<head>
+  <title>Bitcoin Papyrus</title>
+  <style>
+    * { padding: 20; margin: 20; }
+    canvas { background: #eee; display: block; margin: 20 auto; }
+  </style>
+  <style type="text/css">
+  <!--
+   .tit { color: #0095DD; }
+   .tab { margin-left: 20px; }
+   .tab2 { margin-left: 40px; font-size: 20px;}
+   .main { margin-left: 20px; color: #0095DD; font-size: 32px;}
+   .blinking{
+       animation:blinkingText 1.2s infinite;
+   }
+   @keyframes blinkingText{
+       0%{     color: #000;    }
+       40%{    color: transparent; }
+       49%{    color: transparent; }
+       50%{    color: transparent; }
+       60%{    color: transparent; }
+       99%{    color:transparent;  }
+       100%{   color: #000;    }
+   }
+  -->
+  </style>
+  <style>
+  table {
+    width:90%;
+  }
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 9px;
+    text-align: left;
+  }
+  table#t01 tr:nth-child(even) {
+    background-color: #eee;
+  }
+  table#t01 tr:nth-child(odd) {
+   background-color: #fff;
+  }
+  table#t01 th {
+    background-color: black;
+    color: white;
+  }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>  
+  
+<body>
+
+  <h1 class="tit"> Bitcoin Papyrus </h1>
+  <p class="tab"> Lets have the whole world <font color=#0095DD > write shared stories into the bitcoin blockchain! </font> </p>
+  <p class="tab"> To add a letter, send the following amounts (in <b>satoshi</b>) to the bitcoin address below (~10 cents / letter)  </p>
+<table id="t01">
+  <tr>
+    <td><b>A</b> &nbsp 1001</td>
+    <td><b>F</b> &nbsp 1006</td>
+    <td><b>K</b> &nbsp 1011</td>
+    <td><b>P</b> &nbsp 1016</td>
+    <td><b>U</b> &nbsp 1021</td>
+    <td><b>Z</b> &nbsp 1026</td>
+  </tr>          
+  <tr>           
+    <td><b>B</b> &nbsp 1002</td>
+    <td><b>G</b> &nbsp 1007</td>
+    <td><b>L</b> &nbsp 1012</td>
+    <td><b>Q</b> &nbsp 1017</td>
+    <td><b>V</b> &nbsp 1022</td>
+    <td><b>.</b> &nbsp 1027</td>
+  </tr>          
+  <tr>           
+    <td><b>C</b> &nbsp 1003</td>
+    <td><b>H</b> &nbsp 1008</td>
+    <td><b>M</b> &nbsp 1013</td>
+    <td><b>R</b> &nbsp 1018</td>
+    <td><b>W</b> &nbsp 1023</td>
+    <td><b>,</b> &nbsp 1028</td>
+  </tr>          
+  <tr>           
+    <td><b>D</b> &nbsp 1004</td>
+    <td><b>I</b> &nbsp 1009</td>
+    <td><b>N</b> &nbsp 1014</td>
+    <td><b>S</b> &nbsp 1019</td>
+    <td><b>X</b> &nbsp 1024</td>
+    <td><b>!</b> &nbsp 1029</td>
+  </tr>          
+  <tr>           
+    <td><b>E</b> &nbsp 1005</td>
+    <td><b>J</b> &nbsp 1010</td>
+    <td><b>O</b> &nbsp 1015</td>
+    <td><b>T</b> &nbsp 1020</td>
+    <td><b>Y</b> &nbsp 1025</td>
+    <td><b>'</b> &nbsp 1030</td>
+  </tr>
+</table>
+<p class="tab"> <b>[space]</b> &nbsp; 1000  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <b>[break]</b> &nbsp; &nbsp;1031 </p>
+  <p class="tab2" style="font-family:courier;"><mark>1Bkcok3KgqmDReasQzYiBq86WNZea6424o</mark>  <img src="qr.png" alt="bitcoin address QR code" align="middle" style="width:100px; height:100px;" /></p>
+  <p class="tab"> Our story so far... </p>
+
+  <p class="main" id="storycontainer">  ``<span id="story">  </span>  <span class="blinking">_</span> </p>
+  
+
+
+
+<!-- <canvas id="myCanvas" width="550" height="320"></canvas> -->
+
+<script>
+
+var url = 'https://blockchain.info/rawaddr/1Bkcok3KgqmDReasQzYiBq86WNZea6424o?format=json';
+//var canvas = document.getElementById("myCanvas");
+//var ctx = canvas.getContext("2d");
+var n_tx = 0;
+var msg = "";
+var amounts = [];
+var lastFrameTimeMs = -100000;
+
+
+
+function drawStory() {
+  var msg = "";
+  for (i = 0; i < amounts.length; i++) {
+	  switch (amounts[i]) {
+		  case 0:
+		    msg = msg + " ";
+		    break;
+		  case 1:
+		    msg = msg + "A";
+		    break;
+		  case 2:
+		    msg = msg + "B";
+		    break;
+		  case 3:
+		    msg = msg + "C";
+		    break;
+		  case 4:
+		    msg = msg + "D";
+		    break;
+		  case 5:
+		    msg = msg + "E";
+		    break;
+		  case 6:
+		    msg = msg + "F";
+		    break;
+		  case 7:
+		    msg = msg + "G";
+		    break;
+		  case 8:
+		    msg = msg + "H";
+		    break;
+		  case 9:
+		    msg = msg + "I";
+		    break;
+		  case 10:
+		    msg = msg + "J";
+		    break;
+		  case 11:
+		    msg = msg + "K";
+		    break;
+		  case 12:
+		    msg = msg + "L";
+		    break;
+		  case 13:
+		    msg = msg + "M";
+		    break;
+		  case 14:
+		    msg = msg + "N";
+		    break;
+		  case 15:
+		    msg = msg + "O";
+		    break;
+		  case 16:
+		    msg = msg + "P";
+		    break;
+		  case 17:
+		    msg = msg + "Q";
+		    break;
+		  case 18:
+		    msg = msg + "R";
+		    break;
+		  case 19:
+		    msg = msg + "S";
+		    break;
+		  case 20:
+		    msg = msg + "T";
+		    break;
+		  case 21:
+		    msg = msg + "U";
+		    break;
+		  case 22:
+		    msg = msg + "V";
+		    break;
+		  case 23:
+		    msg = msg + "W";
+		    break;
+		  case 24:
+		    msg = msg + "X";
+		    break;
+		  case 25:
+		    msg = msg + "Y";
+		    break;
+		  case 26:
+		    msg = msg + "Z";
+		    break;
+		  case 27:
+		    msg = msg + ".";
+		    break;
+		  case 28:
+		    msg = msg + ",";
+		    break;
+		  case 29:
+		    msg = msg + "!";
+		    break;
+		  case 30:
+		    msg = msg + "'";
+		    break;
+		  case 31:
+		    msg = msg + "<br><br>";
+		    break;
+	  }
+  }
+  document.getElementById("story").innerHTML = msg;
+}
+
+
+
+
+
+function draw(timestamp) {
+  // read address info
+  if (timestamp - lastFrameTimeMs > 100000 ) {
+
+ amounts = [];
+
+ // first get number of transactions:
+  $.getJSON('https://cors-anywhere.herokuapp.com/' + url, function(data){
+	//mass = data.final_balance;
+	n_tx = data.n_tx;
+  });
+  
+  var n_offsets = Math.floor(n_tx/50.);
+
+  for (off = 0; off < n_offsets+1; off++) {
+    $.getJSON('https://cors-anywhere.herokuapp.com/' + url + '&offset=' + 50*off, function(data){
+	  for (i = 0; i < data.txs.length; i++) { 
+	    var amt = data.txs[i].result;	
+	    if(amt > 0 ) {
+	      amt = amt % 100;
+	      if(amt < 32 ) {
+	        amounts.unshift(amt); // reads most recent transactions first
+	      }
+	    }
+      }
+    });
+  }
+    
+  lastFrameTimeMs = timestamp;
+  }
+		
+	
+  // draw screen
+  //ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawStory();
+  requestAnimationFrame(draw);
+}
+
+draw();
+
+</script>
+
+<p> <small>&copy; bitcoinpapyrus (2019) <a href="about.html">about</a></small>  </p>
+
+</body>
+</html>
