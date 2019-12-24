@@ -243,6 +243,10 @@ function draw(timestamp) {
 
  amounts = [];
 
+  $.ajaxSetup({
+      headers: {'X-Requested-With':'XMLHttpRequest'}
+  });
+
  // first get number of transactions:
   $.getJSON('https://cors-anywhere.herokuapp.com/' + url, function(data){
 	//mass = data.final_balance;
