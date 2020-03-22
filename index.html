@@ -243,7 +243,9 @@ function draw(timestamp) {
 
  amounts = [];
 
-  $.ajaxSetup({
+  $.ajax({
+      dataType: "json",
+      contentType: "application/json",
       headers: {'X-Requested-With':'XMLHttpRequest'}
   });
 
