@@ -118,6 +118,8 @@
 
 <script>
 
+var prefix = 'https://cors-anywhere.herokuapp.com/';
+prefix = 'https://alloworigin.com/get?url=';
 var url = 'https://blockchain.info/rawaddr/1Bkcok3KgqmDReasQzYiBq86WNZea6424o?format=json';
 //var canvas = document.getElementById("myCanvas");
 //var ctx = canvas.getContext("2d");
@@ -250,7 +252,7 @@ function draw(timestamp) {
   });
 
  // first get number of transactions:
-  $.getJSON('https://cors-anywhere.herokuapp.com/' + url, function(data){
+  $.getJSON('https://api.allorigins.win/get?url=' + url, function(data){
 	//mass = data.final_balance;
 	n_tx = data.n_tx;
   });
@@ -258,7 +260,7 @@ function draw(timestamp) {
   var n_offsets = Math.floor(n_tx/50.);
 
   for (off = 0; off < n_offsets+1; off++) {
-    $.getJSON('https://cors-anywhere.herokuapp.com/' + url + '&offset=' + 50*off, function(data){
+    $.getJSON('https://api.allorigins.win/get?url=' + url + '&offset=' + 50*off, function(data){
 	  for (i = 0; i < data.txs.length; i++) { 
 	    var amt = data.txs[i].result;	
 	    if(amt > 0 ) {
